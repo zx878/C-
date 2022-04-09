@@ -1,0 +1,97 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CS20220225
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Random RN = new Random();
+            while (true)
+            {
+
+                try
+                {
+                    checked 
+                    {
+                        Console.WriteLine("INPUTER Student:");
+                        //int A0, A1, A2, A3, A4, A5, A6, A7, A8,A9,A10;
+                        //A0 = RN.Next(0, 101);
+                        //A1 = RN.Next(0, 101);
+                        //A2 = RN.Next(0, 101);
+                        //A3 = RN.Next(0, 101);
+                        //A4 = RN.Next(0, 101);
+                        //A5 = RN.Next(0, 101);
+                        //A6 = RN.Next(0, 101);
+                        //A7 = RN.Next(0, 101);
+                        //A8 = RN.Next(0, 101);
+                        //A9 = RN.Next(0, 101);
+                        //A10 = RN.Next(0, 101);
+                        //Console.WriteLine(A0 + "," + A1 + "," + A2 + "," + A3 + "," + A4 + "," + A5 + "," + A6 + "," + A7 + "," + A9 + "," + A10 );
+                        Console.Write("INPUTER Number of student:");
+                        string[] Line = Console.ReadLine().Split(' ');
+                        int Number = int.Parse(Line[0]);
+                        int[] scores = new int[Number];
+                        Console.Write("Unscorted Scores:");
+                        for (int i = 0; i < Number; i++)
+                        {
+                            scores[i] = RN.Next(0,101);
+
+                            Console.Write(scores[i]+ ",");
+                        }
+                        Console.WriteLine();
+                        int temp;
+                        for (int i = 1; i < Number; i++) //最終回合數 n-1
+                        {
+                            for (int j = 1; j <= Number-i;j++) //每回合比較次數 n-(n-1)-1= n-目前回合數i
+                            {
+                                if (scores[j - 1] > scores[j])
+                                {
+                                    
+                                    temp = scores[j];
+                                    scores[j] = scores[j-1];
+                                    scores[j-1] = temp;
+
+                                }
+                                
+
+                            }
+                                                                                   
+                        }
+                        Console.Write("小到大:");
+                        for (int i = 0; i < Number; i++) Console.Write(scores[i] + ",");
+                        Console.WriteLine();
+                        Console.Write("大到小:");
+                        for (int i = Number-1; i >=0; i--) Console.Write(scores[i] + ",");
+                        Console.WriteLine();
+
+
+
+
+                    }
+
+
+                }
+              
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+                finally
+                {
+                    Console.Write("press any key for continue!\n\n");
+                    //Console.ReadKey();
+                }
+
+
+
+
+
+            }
+        }
+    }
+}
