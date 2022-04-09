@@ -1,0 +1,339 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace 1
+{
+    internal class Program
+    {
+      
+        static void Main(string[] args)
+        {
+            CS class1 = new CS();
+            while (true)
+            {
+                class1.Craete(); ;
+                try
+                {
+                    checked
+                    {
+                        Console.WriteLine("Test Data：100 25");
+                        Console.WriteLine("Test Data：10 10");
+                        Console.WriteLine("Test Data：-10 10");
+                        Console.WriteLine("Test Data：541 100");
+                        Console.WriteLine("Test Data：9876543210 20000(....10s)");
+                        Console.Write("[1]多少以內 [2]幾個 :");
+                        string[] Line = Console.ReadLine().Split(' ');
+                        long number = long.Parse(Line[0]);
+                        int PN = int.Parse(Line[1]);
+                        //string[] vs = new string[number];
+                        long x = number;
+                        int d = PN;
+                        int nth = 0;
+                        string[] ZU=new string[PN];
+                        double Starttime = System.DateTime.Now.TimeOfDay.TotalSeconds;
+
+
+                        if (number > 0)
+                        {
+                            int p = 0;
+                            while (nth < PN)
+                            {
+
+                                if (class1.test(number))
+                                {
+                                    ZU[nth] = number.ToString();
+                                    nth++;
+                                    p++;
+                                    
+                                }
+                                number--;
+                                if (number == 0) break;
+                            }
+                            if (p >= PN)
+                            {
+                                for (int i = PN - 1; i >= 0; i--)
+                                {
+                                    Console.WriteLine("P" + PN + "= " + ZU[i]);
+                                    PN--;
+                                }
+                            }
+                            else
+                            {
+                                for (int i = p-1; i >= 0; i--)
+                                {
+                                    Console.WriteLine("P" + p + "= " + ZU[i]);
+                                    
+                                    p--;
+                                }
+                            }
+
+                            
+
+                        }
+                           
+                        
+                        Console.WriteLine("\n" + "P = " + x + "\n");
+                        if (x < 0) Math.Abs(x);//轉正數
+                        nth = 0;
+                        while (nth < d)
+                        {
+
+
+                            if (class1.test(x))
+                            {
+                                nth++;
+                                Console.WriteLine("P" + nth + "= " + x);
+                            }
+                            x++;
+                        }
+
+                       
+
+
+
+                        
+
+
+
+                      
+
+                        double Endtime = System.DateTime.Now.TimeOfDay.TotalSeconds;
+                        Console.WriteLine("共計" + PN + "個質數:" + Math.Round(Endtime - Starttime, 3) + "秒");
+
+                        //1.                                                
+                        /*
+                         int[] PrimeNo = new int[100000000];
+                         PrimeNo[1] = 2; PrimeNo[2] = 3; PrimeNo[3] = 5; PrimeNo[4] = 7;
+                         int N = 11;
+                         int p = 1;
+                         int nq, Sqaueroot;
+                         if (number > 0)
+                         {
+                             for (int n = 5; n <= 100000000; n++)//100000以內就可以算出所以INT質數
+                             {
+
+                                 Sqaueroot = (int)Math.Sqrt(N) + 2;
+
+                                 nq = 1;
+                                 while (Sqaueroot >= PrimeNo[nq])
+                                 {
+                                     if (N % PrimeNo[nq] == 0)
+                                     {
+                                         N += 2;
+                                         nq = 1;
+
+
+                                     }
+                                     else nq++;
+
+                                 }
+                                 PrimeNo[n] = N;
+                                 N += 2;
+                                 if (PrimeNo[n - 4] <= number)
+                                 {
+
+                                     p++;
+
+
+                                 }
+                                 else break;
+
+
+                             }
+                             int a = PN;
+
+                             if (p > a)
+                             {
+
+                                 for (int i = p - a; i < p; i++)
+                                 {
+                                     Console.WriteLine("P" + a + "= " + PrimeNo[i]);
+                                     a--;
+                                 }
+                             }
+                             else
+                             {
+
+                                 int pp = p - 1;
+                                 for (int i = 1; i < p; i++)
+                                 {
+
+                                     Console.WriteLine("P" + pp + "= " + PrimeNo[i]);
+                                     pp--;
+                                 }
+                             }
+                         }
+                         Console.WriteLine("\n" + "P = " + number + "\n");
+                         if (number < 0)
+                         {
+                             Math.Abs(number);//轉正數
+                             p = 5;
+                         }
+                         else N = PrimeNo[p];
+                         int z = 1;
+
+                         for (int n = p; n <= 100000000; n++)
+                         {
+
+                             Sqaueroot = (int)Math.Sqrt(N) + 2;
+
+                             nq = 1;
+                             while (Sqaueroot >= PrimeNo[nq])
+                             {
+                                 if (N % PrimeNo[nq] == 0)
+                                 {
+                                     N+=2;
+                                     nq = 1;
+
+
+                                 }
+                                 else nq++;
+
+                             }
+                             PrimeNo[n] = N;
+                             N+=2;
+                             if (PrimeNo[n-4] >= number)
+                             {
+
+                                 Console.WriteLine("P" + z + "= " + PrimeNo[n-4]);
+                                 z++;
+                                 if (z > PN) break;
+                             }
+
+
+                         }
+                         */
+
+                        //2.
+                        //Console.WriteLine("P" + (n - 4) + "= " + PrimeNo[n - 4]);
+                        /*
+                        if (number < 0) ;
+                        else
+                        {
+                            for (long i = 1; i <= number; i++)//找幾個P
+                            {
+                                if (PrimeYN(i))
+                                {
+                                    
+                                    x++;
+
+                                }
+
+                            }
+
+                            for (long i = 1; i <= number; i++)//顯示質數
+                            {
+                                if (PrimeYN(i))
+                                {
+
+                                    Console.WriteLine("P" + x + "= " + i);
+                                    x--;
+                                }
+
+                            }
+                        }
+                        */
+
+
+                        //int nth = 0;
+                        //while (nth < PN)//次數
+                        //{
+
+                        //    if (PrimeYN((long)number))//從number開始
+                        //    {
+                        //        nth++;
+                        //        Console.WriteLine("P" + nth + "= " + number);
+                        //    }
+                        //    number++;
+                        //}
+
+
+                    }
+                  
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+                finally
+                {
+                    Console.WriteLine("paress any key to continue ");
+                    Console.ReadKey();
+                }
+
+            }
+        }
+
+       
+
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace 1
+{
+    internal class CS
+    {
+       
+            public int[] PrimeNoo = new int[1000001];
+            public void Craete()
+            {
+                PrimeNoo[1] = 2; PrimeNoo[2] = 3; PrimeNoo[3] = 5; PrimeNoo[4] = 7;
+                int N = 11;
+                int nq, Sqaueroot;
+                for (int n = 5; n <= 100000; n++)//100000以內就可以算出所以INT質數
+                {
+                    Sqaueroot = (int)Math.Sqrt(N) + 1;
+
+                    nq = 1;
+                    while (Sqaueroot >= PrimeNoo[nq])
+                    {
+                        if (N % PrimeNoo[nq] == 0)
+                        {
+                            N++;
+                            nq = 1;
+
+
+                        }
+                        else nq++;
+
+                    }
+                    PrimeNoo[n] = N;
+                    N++;
+                }
+               Console.WriteLine("PrimeNo[1000] = " + PrimeNoo[1000]);
+            }
+
+        public bool test(long X)
+        {
+            int PR = 1;
+            if (X <= 1) return false;//0-1不算
+            else if (X == 2) return true;
+            else if (X % 2 == 0) return false;//偶數不算
+
+            else   //X > 2
+            {
+                int SRoot = (int)Math.Sqrt(X)+2;
+                while (SRoot > PrimeNoo[PR])
+                {
+                    if (X % PrimeNoo[PR] == 0) return false;
+                    else PR++;
+
+
+                }
+                return true;// is prime Number
+            }
+            
+        }
+    }
+        
+}
