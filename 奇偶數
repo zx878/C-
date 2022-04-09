@@ -1,0 +1,97 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CS20220224B
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random RN = new Random();
+            while (true)
+            {
+                try
+                {
+                    checked
+                    {
+                        Console.Write("INPUT number of digit & times？");
+                        string[] Line = Console.ReadLine().Split(' ');
+                        int digit = int.Parse(Line[0]);
+                        int times = int.Parse(Line[1]);
+                        int Number; // = RN.Next(1000, 10000);  //1000 ~ 9999
+                        string ID;
+                        for (int i = 1; i <= times; i++)
+                        {
+
+                            //1.String
+                            //ID = null;  //ID="";
+                            //for (int j = 1; j <= digit; j++)
+                            //{
+                            //    //ID = ID + RN.Next(0, 10);
+                            //    ID += RN.Next(0, 10);//0-9
+                            //}
+                            //Console.WriteLine(i + ". " + ID + "：" + EvenOdd(ID) + "\n");
+
+                            //2.Number
+                            //取位數
+                            Number = RN.Next((int)Math.Pow(10, digit - 1), (int)Math.Pow(10, digit));//預設是double所以要轉
+                            Console.WriteLine(i + " " + Number + ":" + Oddeven(Number) + "\n");
+
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+                finally
+                {
+                    Console.Write("press any key for continue!\n\n");
+                    Console.ReadKey();
+                }
+            }
+        }
+
+        static string EvenOdd(string S)
+        {
+            int even=0;
+            int odd=0 ;
+
+            for (int i = 0; i < S.Length ; i++)
+            {
+                if (int.Parse(S.Substring(i, 1)) % 2 == 0) even++; 
+                else odd++;
+            }
+
+            return "奇(" + odd + ")偶(" + even + ")";
+            
+        }
+        static string Oddeven(int N)
+        {
+            int even = 0;
+            int odd = 0;
+
+            int O, R;//(商數,餘數)
+            while (true)
+            {
+                R = N % 2;//找最後一個數
+                if (R == 0) even++;
+                else odd++;
+
+                O = N / 10;
+                if (O == 0) break;
+                else N =O ;
+    
+            
+            }
+
+            return "奇(" + odd + ")偶(" + even + ")";
+
+        }
+
+    }
+}
