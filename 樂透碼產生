@@ -1,0 +1,90 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CS20220331
+{
+    internal class Program
+    {
+        
+        static void Main(string[] args)
+        {
+            Random rn = new Random();
+            int nth;
+            bool test;
+            int[] Lottocode =new int[8];//樂透數
+            while (true)
+            {
+                try
+                {
+
+                    Console.Write("請輸入需幾組樂透碼[6+1(特別號)]？Max. Numbe of Lotto[7-49]？Time for one code generated？");
+                    string[] Line = Console.ReadLine().Split(' ');
+                    int NUM = int.Parse(Line[0]);//幾組
+                    int Max = int.Parse(Line[1]);//最大數
+                    int Onecodetime = int.Parse(Line[2]);//延遲時間
+                    if (NUM < 0 || Max < 7 || Onecodetime < 0) goto skip;
+                    for (int i = 1; i <= NUM; i++)
+                    {
+                        nth = 1;
+                        
+                        while (nth<=7)
+                        {
+                           
+                            test = true;
+                            while(test)
+                            {
+                                test = false;//只做一次
+                                Lottocode[nth] = rn.Next(1, Max + 1);
+                                System.Threading.Thread.Sleep(Onecodetime);
+                                Console.Write(Lottocode[nth]);
+                                for (int j = 1; j < nth; j++)
+                                {
+                                    if (Lottocode[nth] == Lottocode[j])
+                                    {
+                                        test=true;//如果一樣就重複再做一次
+                                        Console.Write(string.Empty.PadLeft(2));
+                                        break;
+                                    }
+                                   
+                                }
+                                
+
+                               
+                            }
+                            Console.Write("*"+ string.Empty.PadLeft(2)) ;
+                            nth++;
+                        }
+
+                        Console.WriteLine();
+                        Console.BackgroundColor=ConsoleColor.Yellow;
+                        Console.ForegroundColor=ConsoleColor.Red;
+                        Console.WriteLine(i + ". ");
+                        for(int n = 1; n <= 7; n++)
+                        {
+                            Console.Write(Lottocode[n] + string.Empty.PadLeft(2));//往後空兩格
+
+                        }
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine(); Console.WriteLine();
+                    }
+
+                    skip:;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+                finally
+                {
+                    Console.WriteLine("paress any key to continue ");
+                    Console.ReadKey();
+                }
+
+            }
+        }
+    }
+}
