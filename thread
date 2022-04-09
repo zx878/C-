@@ -1,0 +1,123 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Threading;
+namespace CS20220401
+{
+    internal class Program
+    {
+        static Random rn = new Random();
+        static System.Threading.Thread ThreadA, ThreadB, ThreadC;
+        static byte A, B, C, Nth;
+        static int sleeptime;
+        static void Main(string[] args)
+        {
+            while (true)
+            {
+                try
+                {
+                    checked
+                    {
+                        Console.Write("Press Y(y) for Continue Else for No？ Nth？ SleepTime(ms)？");
+                        string[] Line =Console.ReadLine().Split(' ');
+                        
+                        Nth = byte.Parse(Line[1]);
+                        sleeptime = int.Parse(Line[2]);
+                        if (Line[0] == "Y" || Line[0] == "y")
+                        {
+
+                            A = 0; B = 0; C = 0;
+                            ThreadA = new Thread(new ThreadStart(IMA));
+                            ThreadB = new Thread(new ThreadStart(IMB));
+                            ThreadC = new Thread(new ThreadStart(IMC));
+                            
+                            ThreadA.Start();
+                            ThreadB.Start();
+                            ThreadC.Start();
+                            
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+                finally
+                {
+                    //Console.WriteLine("paress any key to continue ");
+                    Console.ReadKey();
+                }
+
+            }
+        }
+        private static void IMA()
+        {
+            for(int i = 1; i <= Nth; i++)
+            {
+
+                
+                Thread.Sleep(rn.Next(1, sleeptime));
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine();
+                Console.WriteLine("資一甲("+i +")"+ System.DateTime.Now.ToString());
+                
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.White;
+               
+               
+
+            }
+
+            ThreadB.Abort();
+            ThreadC.Abort();
+            Console.WriteLine("winner 資一甲");
+            ThreadA.Abort();
+            
+        }
+        private static void IMB()
+        {
+            for (int i = 1; i <= Nth; i++)
+            {
+                B++;
+                Thread.Sleep(rn.Next(1, sleeptime));
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine();
+                Console.WriteLine("資一乙(" + i + ")" + System.DateTime.Now.ToLongTimeString());
+                
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.White;
+                
+            }
+            ThreadA.Abort();
+            ThreadC.Abort();
+            Console.WriteLine("winner 資一乙");
+            ThreadB.Abort();
+
+        }
+        private static void IMC()
+        {
+            for (int i = 1; i <= Nth; i++)
+            {
+                C++;
+                Thread.Sleep(rn.Next(1, sleeptime));
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine();
+                Console.WriteLine("資一丙(" + i + ")" + System.DateTime.Now.Hour+":"+DateTime.Now.Minute + ":" + DateTime.Now.Second);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.White;
+                
+            }
+            ThreadA.Abort();
+            ThreadB.Abort();
+            Console.WriteLine("winner 資一丙");
+
+            ThreadC.Abort();
+
+        }
+
+    }
+}
