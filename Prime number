@@ -76,7 +76,7 @@ namespace 1
                            
                         
                         Console.WriteLine("\n" + "P = " + x + "\n");
-                        if (x < 0) Math.Abs(x);//轉正數
+                        
                         nth = 0;
                         while (nth < d)
                         {
